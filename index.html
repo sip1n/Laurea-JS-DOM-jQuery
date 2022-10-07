@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <title>To-Do</title>
+    <script src="js/script.js"></script>
+</head>
+<body class="bg-slate-800 mt-3">
+
+    <!-- Container to hold everything inside -->
+    <div class="container bg-slate-900 p-4 w-2/3 mx-auto rounded-lg">
+
+        <!-- Title -->
+        <nav class="w-full">
+            <h1 class="text-white mx-auto p-2 text-center text-3xl">
+                To-Do
+            </h1>
+        </nav>
+
+        <!-- This part holds text-input and button for adding new item to todo list -->
+        <div class="bg-slate-800 w-full p-4 rounded-md">
+            <form id="addForm">
+                <input type="text" placeholder="New.." id="addTodo" title="addTodo" class="bg-slate-700 w-2/3 text-white mx-auto h-300 text-1xl rounded-md p-2" />
+                <button id="addButton" type="submit" class="bg-slate-800 mx-auto p-2 rounded-lg border-solid border-slate-900 border-2">
+                    <h2 class="text-slate-400 mx-auto p2 text-xl">
+                        Add
+                    </h2>
+                </button>
+            </form>
+        </div>
+
+        <!-- This part holds one item from todo list with buttons to mark as done and button to remove item -->
+        <div class="bg-slate-800 w-full p-4 rounded-md flex">
+            <button id="doneButton" type="submit" class="bg-slate-800 mx-auto p-2 rounded-lg border-solid border-slate-900 border-2 ">
+                <h2 class="text-slate-400 mx-auto p2 text-xl">
+                    Done
+                </h2>
+            </button>
+            <button id="removeButton" type="submit" class="bg-slate-800 mx-auto p-2 rounded-lg border-solid border-slate-900 border-2 ">
+                <h2 class="text-slate-400 mx-auto p2 text-xl">
+                    Remove
+                </h2>
+            </button>
+            
+            <button id="removeAllButton" type="submit" class="bg-slate-800 mx-auto p-2 rounded-lg border-solid border-slate-900 border-2 ">
+                <h2 class="text-slate-400 mx-auto p2 text-xl">
+                    Clear localStorage
+                </h2>
+            </button>
+        </div>
+
+
+    </div>
+</body>
+</html>
