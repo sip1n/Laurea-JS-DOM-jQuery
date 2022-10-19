@@ -1,5 +1,5 @@
 const addForm = document.querySelector('#addForm');
-const todoInput = document.querySelector('#todoInput');
+const formInput = document.querySelector('#formInput');
 
 const itemBoard = document.querySelector('#itemBoard');
 const items = document.querySelectorAll('.taskItem');
@@ -14,8 +14,8 @@ window.addEventListener('load', e =>{
 addForm.addEventListener('submit', event => {
     //prevent form submit
     event.preventDefault();
-    if (todoInput.value.length >= 3) {addTask();};
-    todoInput.value = '';
+    if (formInput.value.length >= 3) {addTask();};
+    formInput.value = '';
 })
 
 window.addEventListener('click', e => {
@@ -26,7 +26,7 @@ window.addEventListener('click', e => {
 addTask = function () {
     const item = {
         id: Date.now(),
-        text: todoInput.value,
+        text: formInput.value,
         isDone: false
     };
     itemList.push(item);
