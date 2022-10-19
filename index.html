@@ -1,58 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
+    <script src="https://kit.fontawesome.com/bc86335704.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <title>To-Do</title>
-    <script src="js/script.js"></script>
 </head>
-<body class="bg-slate-800 mt-3">
+
+<body class="bg-stone t-dark">
 
     <!-- Container to hold everything inside -->
-    <div class="container bg-slate-900 p-4 w-2/3 mx-auto rounded-lg">
-
+    <div class="container-fluid">
         <!-- Title -->
-        <nav class="w-full">
-            <h1 class="text-white mx-auto p-2 text-center text-3xl">
-                To-Do
-            </h1>
-        </nav>
+        <h1 class="fs-1 text-center mt-4 text-decoration-underline">ToDo List</h1>
 
         <!-- This part holds text-input and button for adding new item to todo list -->
-        <div class="bg-slate-800 w-full p-4 rounded-md">
-            <form id="addForm">
-                <input type="text" placeholder="New.." id="addTodo" title="addTodo" class="bg-slate-700 w-2/3 text-white mx-auto h-300 text-1xl rounded-md p-2" />
-                <button id="addButton" type="submit" class="bg-slate-800 mx-auto p-2 rounded-lg border-solid border-slate-900 border-2">
-                    <h2 class="text-slate-400 mx-auto p2 text-xl">
-                        Add
-                    </h2>
+
+        <form id="addForm" class="text-center mt-3">
+            <input type="text" id="todoInput" placeholder="Type here to add new.." class="input border-0" />
+            <button type="submit" class="button border-0">
+                <i class="fa-solid fa-plus" title="Add"></i>
+            </button>
+        </form>
+
+
+
+        <!-- this div is holds all todo items -->
+        <h3 class="text-center mt-4">Tasks</h3>
+        <div id="itemBoard" class="w-20rem mx-auto mt-3">
+
+            <!-- all items will be generated here in JS -->
+
+            <!-- Example of item -->
+            <!--
+                <div id="1234567890123" class="taskItem d-flex">
+                    <button class="t-dark button border-0 ms-2 me-auto mt-auto mb-auto" type="button" title="Mark as Done">
+                        <i class="fa-regular fa-check-circle fa-xl"></i>
+                    </button>
+
+                    <h5 class="taskText mt-auto mb-auto text-center fs-5">Example</h5>
+
+                    <button class="t-dark button border-0 ms-auto me-2 mt-auto mb-auto" type="submit" title="Remove">
+                        <i class="fa-regular fa-circle-xmark fa-xl"></i>
+                    </button>
+                </div>
+            -->
+        </div>
+
+        <!-- Here we have button to clear localstorage -->
+        <div class="text-center mt-4">
+            <div>
+                <button id="removeAllButton" type="submit" class="button border-0" title="Remove All">
+                    <i class="t-dark fa-solid fa-trash mt-5"></i>
                 </button>
-            </form>
+            </div>
+            <a href="https://github.com/sip1n/Laurea-JS-DOM" title="GitHub Repository">
+                <button class="button border-0 mt-5" title="GitHub Repository">
+                    <i class="t-dark fa-brands fa-github fa-2xl"></i>
+                </button>
+            </a>
         </div>
-
-        <!-- This part holds one item from todo list with buttons to mark as done and button to remove item -->
-        <div class="bg-slate-800 w-full p-4 rounded-md flex">
-            <button id="doneButton" type="submit" class="bg-slate-800 mx-auto p-2 rounded-lg border-solid border-slate-900 border-2 ">
-                <h2 class="text-slate-400 mx-auto p2 text-xl">
-                    Done
-                </h2>
-            </button>
-            <button id="removeButton" type="submit" class="bg-slate-800 mx-auto p-2 rounded-lg border-solid border-slate-900 border-2 ">
-                <h2 class="text-slate-400 mx-auto p2 text-xl">
-                    Remove
-                </h2>
-            </button>
-            
-            <button id="removeAllButton" type="submit" class="bg-slate-800 mx-auto p-2 rounded-lg border-solid border-slate-900 border-2 ">
-                <h2 class="text-slate-400 mx-auto p2 text-xl">
-                    Clear localStorage
-                </h2>
-            </button>
-        </div>
-
-
     </div>
+
+    <script src="script.js"></script>
 </body>
+
 </html>

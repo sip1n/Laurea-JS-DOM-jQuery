@@ -1,0 +1,20 @@
+:root{
+    --light: #b9b3b3;
+    --dark: #534f4f;
+}
+.button{
+    background-color: var(--light);
+}
+.input{
+    background-color: var(--light);
+    outline: none;
+}
+.bg-stone{
+    background-color: var(--light);
+}
+.w-20rem{
+    max-width: 20rem;
+}
+.t-dark{
+    color: var(--dark);
+}
