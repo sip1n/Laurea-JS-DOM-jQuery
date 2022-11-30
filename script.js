@@ -1,16 +1,15 @@
-const addForm = document.querySelector('#addForm');
-const formInput = document.querySelector('#formInput');
+const addForm = $('#addForm')[0];
+const formInput = $('#formInput')[0];
+const itemBoard = $('#itemBoard')[0];
+const items = $('.taskItem');
 
-const itemBoard = document.querySelector('#itemBoard');
-const items = document.querySelectorAll('.taskItem');
-
-window.addEventListener('load', () => {
+$(window).on('load', () => {
     listInit(itemBoard);
 })
 
 function listInit(i) {
     //function to check localStorage
-    
+
     if (localStorage.getItem('item-list') === null) {
         // create new global variable if localStorage == null
         itemList = [];
@@ -28,7 +27,7 @@ function listInit(i) {
 
 
 // listen for submit event on addForm
-addForm.addEventListener('submit', event => {
+$('#addForm').submit(event => {
     //prevent form from submitting 
     event.preventDefault();
 
@@ -52,13 +51,13 @@ addForm.addEventListener('submit', event => {
 })
 
 // revert inputfield back to normal if user clicks it faster than 3 sec timeout
-formInput.addEventListener('focus', () => {
-    formInput.placeholder = 'Type here to add new..';
-    formInput.classList.remove('text-bg-warning');
+$('#formInput').focus(() => {
+    $('#formInput').attr('placeholder', 'Type here to add new..');
+    $('#formInput').removeClass('text-bg-warning');
 })
 
 
-itemBoard.addEventListener('click', event => {
+$('#itemBoard').click(event => {
     const target = event.target;
     const targetNode = target.parentNode.parentNode;
 
@@ -68,7 +67,9 @@ itemBoard.addEventListener('click', event => {
         const filtereditemList = itemList.filter((item) => item.id !== parseInt(targetNode.id));
         itemList = filtereditemList;
         window.localStorage.setItem('item-list', JSON.stringify(itemList));
-        targetNode.remove();
+        // fade element out in 500 ms and then remove it
+        $(targetNode).fadeOut(500, () => {$(targetNode).remove();});
+        
     }
     // done button functionality
     if (target.parentNode.classList.contains('doneBtn') === true) {
@@ -77,9 +78,9 @@ itemBoard.addEventListener('click', event => {
         // check if task is done
         selected.isDone === true
             // if true set isDone to false and remove line through from text 
-            ? (selected.isDone = false, target.parentNode.parentNode.classList.remove('text-decoration-line-through','text-success'))
+            ? (selected.isDone = false, target.parentNode.parentNode.classList.remove('text-decoration-line-through', 'text-success'))
             // if fales set is done to true and add line through to text
-            : (selected.isDone = true, target.parentNode.parentNode.classList.add('text-decoration-line-through','text-success'));
+            : (selected.isDone = true, target.parentNode.parentNode.classList.add('text-decoration-line-through', 'text-success'));
         window.localStorage.setItem('item-list', JSON.stringify(itemList));
 
     }
@@ -102,41 +103,30 @@ addTask = function () {
 function buildItem(element) {
     // item layout in order || done button - task text - remove button ||
 
-    // first div that holds item
-    const newDiv = document.createElement('div');
-    newDiv.id = element.id;
-    newDiv.classList.add('taskItem', 'd-flex');
-    if (element.isDone === true) { newDiv.classList.add('text-decoration-line-through','text-success') }
+    // create div element with id and classes and add it to FIRST item on itemBoard
+    $('<div id="' + element.id + '"></div>').prependTo($('#itemBoard')[0])
+        .addClass('taskItem d-flex')
 
-    // done button => <button> <icon /> </button>
-    const doneBtn = document.createElement('button');
-    doneBtn.classList.add('doneBtn', 't-dark', 'button', 'border-0', 'ms-2', 'me-auto', 'mt-auto', 'mb-auto')
-    doneBtn.type = 'button';
-    doneBtn.title = 'Mark as Done';
-    const checkIcon = document.createElement('i');
-    checkIcon.classList.add('fa-regular', 'fa-check-circle', 'fa-xl');
-    doneBtn.appendChild(checkIcon);
+    // add buttons and text to div element
+    const doneBtn = $('<button></button>').appendTo('#' + element.id)
+        .addClass('doneBtn t-dark button border-0 ms-2 me-auto mt-auto mb-auto')
+        .attr('type', 'button')
+        .attr('title', 'Done')
 
-    // display task text from stored object => <h5> {item.text}
-    const newTask = document.createElement('h5');
-    newTask.classList.add('taskText', 'mt-auto', 'mb-auto', 'text-center', 'fs-5');
-    newTask.innerText = element.text;
+    $('<i></i>').appendTo(doneBtn)
+        .addClass('fa-regular fa-check-circle fa-xl')
 
-    // remove button => <button> <icon /> </button>
-    const removeBtn = document.createElement('button');
-    removeBtn.classList.add('removeBtn', 't-dark', 'button', 'border-0', 'ms-auto', 'me-2', 'mt-auto', 'mb-auto')
-    removeBtn.type = 'button';
-    removeBtn.title = 'Remove';
-    const xmarkIcon = document.createElement('i');
-    xmarkIcon.classList.add('fa-regular', 'fa-circle-xmark', 'fa-xl');
-    removeBtn.appendChild(xmarkIcon);
+    $('<h5>' + element.text + '</h5>').appendTo('#' + element.id)
+        .addClass('taskText mt-auto mb-auto text-center fs-5')
 
-    // append buttons and task text inside of newDiv
-    newDiv.appendChild(doneBtn);
-    newDiv.appendChild(newTask);
-    newDiv.appendChild(removeBtn);
-    // append newDiv inside itemBoard
-    document.querySelector('#itemBoard').appendChild(newDiv);
+    const removeBtn = $('<button></button>').appendTo('#' + element.id)
+        .addClass('removeBtn t-dark button border-0 ms-auto me-2 mt-auto mb-auto')
+        .attr('type', 'button')
+        .attr('title', 'Remove')
+
+    $('<i></i>').appendTo(removeBtn)
+        .addClass('fa-regular fa-circle-xmark fa-xl')
+
 
 }
 
